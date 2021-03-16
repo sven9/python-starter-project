@@ -1,0 +1,16 @@
+name: Release
+
+on: [workflow_dispatch]
+
+jobs:
+  release:
+    if: "!startsWith(github.event.head_commit.message, 'bump:')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+      - name: Bump version and create changelog
+        uses: commitizen-tools/commitizen-action@master
+        with:
+          branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
