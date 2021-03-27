@@ -32,7 +32,7 @@ repos:
     language_version: python3
     args: ["-c", "bandit.yaml"]
 - repo: https://github.com/psf/black
-  rev: 19.10b0
+  rev: 20.8b1
   hooks:
   - id: black
     language_version: python3
