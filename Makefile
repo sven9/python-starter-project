@@ -3,10 +3,15 @@ setup-pre-commit:
 	pre-commit install --hook-type pre-commit
 	pre-commit install --hook-type commit-msg
 
-REPORTS_METRICS_DIR=./reports/metrics
-metrics-reports:
-	mkdir -p ${REPORTS_METRICS_DIR}
-	radon cc -a -o SCORE --md -O ${REPORTS_METRICS_DIR}/cyclomatic-complexity.md .
-	radon mi . > ${REPORTS_METRICS_DIR}/maintainability-index.txt
-	radon raw -s . > ${REPORTS_METRICS_DIR}/raw-metrics.txt
-	radon hal . > ${REPORTS_METRICS_DIR}/halstead-complexity.txt
+REPORTS_DIR=./reports
+
+quality-reports:
+	mkdir -p ${REPORTS_DIR}/quality
+	radon cc -a -o SCORE --md -O ${REPORTS_DIR}/quality/cyclomatic-complexity.md .
+	radon mi . > ${REPORTS_DIR}/quality/maintainability-index.txt
+	radon raw -s . > ${REPORTS_DIR}/quality/raw-metrics.txt
+	radon hal . > ${REPORTS_DIR}/quality/halstead-complexity.txt
+
+run-tests:
+	mkdir -p ${REPORTS_DIR}/coverage
+	PYTHONPATH=src pytest --cov=src --cov-report html:reports/coverage tests/
