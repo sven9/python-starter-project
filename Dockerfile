@@ -10,6 +10,8 @@ ENV PYTHONFAULTHANDLER=1 \
     PIP_DEFAULT_TIMEOUT=100 \
     DEV_REQUIREMENTS_PATH=$HOME/requirements.txt
 
+WORKDIR /project
+
 FROM base AS builder
 
 ENV POETRY_VERSION=1.1.5 \
@@ -33,8 +35,6 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry export --without-hashes -f requirements.txt | pip install -r /dev/stdin && \
     poetry export --dev --without-hashes -f requirements.txt -o $DEV_REQUIREMENTS_PATH
 
-COPY . .
-
 FROM base AS development
 
 COPY --from=builder $VENV_PATH $VENV_PATH
@@ -56,3 +56,11 @@ RUN pip install -r $DEV_REQUIREMENTS_PATH
 COPY . .
 
 CMD ["pytest", "tests"]
+
+FROM base AS production
+
+COPY --from=builder $VENV_PATH $VENV_PATH
+
+COPY . .
+
+CMD ["tail", "-f", "/dev/null"]

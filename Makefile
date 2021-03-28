@@ -14,4 +14,4 @@ quality-reports:
 
 run-tests:
 	mkdir -p ${REPORTS_DIR}/coverage
-	PYTHONPATH=src pytest --cov=src --cov-report html:reports/coverage tests/
+	pytest --cov=python_starter_project --cov-report html:${REPORTS_DIR}/coverage tests/
