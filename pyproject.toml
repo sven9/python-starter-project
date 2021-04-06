@@ -1,8 +1,9 @@
 [tool.poetry]
 name = "python-starter-project"
 version = "0.1.0"
-description = ""
+description = "Template for creating new projects"
 authors = ["sven9 <sven9@users.noreply.github.com>"]
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
