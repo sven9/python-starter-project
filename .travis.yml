@@ -12,13 +12,18 @@ before_install:
 
 install:
   - poetry install -v
-  - pre-commit install-hooks
+#  - pre-commit install-hooks
 
 cache:
   pip: true
   directories:
     - $HOME/.cache/pre-commit
 
+jobs:
+  include:
+    - stage: lint
+      python: "3.6"
+      script: pre-commit run --all-files
+
 script:
-  - pre-commit run --all-files
   - pytest --cov-report=xml tests/
