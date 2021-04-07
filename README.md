@@ -1,7 +1,8 @@
 # Python Starter Project
 
 [![Build Status](https://travis-ci.com/sven9/python-starter-project.svg?branch=main)](https://travis-ci.com/sven9/python-starter-project)
-![example workflow](https://github.com/sven9/python-starter-project/actions/workflows/ci.yml/badge.svg)
+![Lint](https://github.com/sven9/python-starter-project/actions/workflows/lint.yml/badge.svg)
+![Test](https://github.com/sven9/python-starter-project/actions/workflows/test.yml/badge.svg)
 [![Code Coverage](https://img.shields.io/codecov/c/github/sven9/python-starter-project)](https://codecov.io/github/sven9/python-starter-project)
 ![GitHub](https://img.shields.io/github/license/sven9/python-starter-project)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
