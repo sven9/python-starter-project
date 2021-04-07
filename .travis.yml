@@ -12,7 +12,6 @@ before_install:
 
 install:
   - poetry install -v
-#  - pre-commit install-hooks
 
 cache:
   pip: true
@@ -26,4 +25,5 @@ jobs:
       script: pre-commit run --all-files
 
 script:
-  - pytest --cov-report=xml tests/
+  - pytest --cov-report xml tests
+  - bash <(curl -s https://codecov.io/bash) -cF python
