@@ -6,12 +6,16 @@ python:
   - "3.9"
 dist: xenial
 
+stages:
+  - lint
+  - test
+
 before_install:
   - pip install --upgrade pip
-  - pip install poetry
 
 install:
-  - poetry install -v
+  - pip install poetry
+  - poetry install -v --no-interaction --no-root
 
 cache:
   pip: true
@@ -21,9 +25,12 @@ cache:
 jobs:
   include:
     - stage: lint
-      python: "3.6"
+      install:
+        - pip install pre-commit
       script: pre-commit run --all-files
 
 script:
-  - pytest --cov-report xml tests
-  - bash <(curl -s https://codecov.io/bash) -cF python
+  - pytest --cov python_starter_project --cov-report xml tests
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
